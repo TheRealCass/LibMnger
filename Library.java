@@ -1,18 +1,18 @@
+import java.util.ArrayList;
+
 /**
  * Class Name: Library
  * 
- * DESCRIPTION
- *      holds data and info library to store and borrow books
+ * DESCRIPTION: holds data and info library to store and borrow books
+ * 
  * @author   Rubait Ul Ahamed
  * @version 3.0
  *
- * @todo: Library can only hold MAX_BOOKS ammount. This can be set with respect to each systems config
  */
 class Library{
 
-    private Book[] bookShelf;
+    private ArrayList<Book> bookShelf;
     private int bookCount;
-    private final int MAX_BOOKS = 50000;
 
     private final boolean DEBUG = false;
 
@@ -23,7 +23,7 @@ class Library{
      * @param void
      */
     public Library(){
-        bookShelf = new Book[MAX_BOOKS];
+        bookShelf = new ArrayList<Book>();
         bookCount = 0;
     }
 
@@ -34,12 +34,10 @@ class Library{
      * @return (void) adds books to the array
      */
     public void addBook(Book toAdd){
-        if(bookCount <= MAX_BOOKS){
-            bookShelf[bookCount] = toAdd;
-            bookCount++;
-            if (DEBUG){
-                System.out.println(toAdd.getTitle() + " by " + toAdd.getInitials() + " added.");
-            }
+        bookShelf.add(bookCount, toAdd);
+        bookCount++;
+        if (DEBUG){
+            System.out.println(toAdd.getTitle() + " by " + toAdd.getInitials() + " added.");
         } else {
             if (DEBUG)
                 System.out.println("Can not add book to library. Not enough space in  program memory.");
@@ -56,9 +54,9 @@ class Library{
     public String listByAuthor(String authorLastName){
         String toReturn = "Books by " + authorLastName + ":\n";
         for(int i = 0; i < getBookCount(); i++) {
-            boolean match = authorLastName.equals(bookShelf[i].getAuthorLastName()); 
+            boolean match = authorLastName.equals(bookShelf.get(i).getAuthorLastName()); 
             if(match){
-                toReturn += bookShelf[i].toString() + "\n";
+                toReturn += bookShelf.get(i).toString() + "\n";
             }
         }
         return toReturn;
@@ -74,9 +72,9 @@ class Library{
     public String listByTitle(String bookTitle){
         String toReturn = "Books named " + bookTitle + ":\n";
         for (int i = 0; i < getBookCount(); i++) {
-            boolean match = bookTitle.equals(bookShelf[i].getTitle()); 
+            boolean match = bookTitle.equals(bookShelf.get(i).getTitle()); 
             if(match){
-                toReturn += bookShelf[i].toString() + "\n";
+                toReturn += bookShelf.get(i).toString() + "\n";
             }
         }
         return toReturn;
@@ -155,8 +153,8 @@ class Library{
 
         //innitialising condition variables
         for (int i = 0; i < getBookCount(); i++) {
-            nameCondition = name.equals(bookShelf[i].getInitials());
-            titleCondition = title.equals(bookShelf[i].getTitle());
+            nameCondition = name.equals(bookShelf.get(i).getInitials());
+            titleCondition = title.equals(bookShelf.get(i).getTitle());
             if (titleCondition) {
                 titleMatch = true;
                 if (nameCondition) {
@@ -167,7 +165,7 @@ class Library{
             if(nameMatch && titleMatch){
                 if(DEBUG)
                     System.out.println("book found");
-                return bookShelf[i];
+                return bookShelf.get(i);
             }
         
         }
@@ -187,7 +185,7 @@ class Library{
     public String toString(){
         String toReturn = "Books in " + this.getClass().getName() + "\n";
         for (int i = 0; i < getBookCount(); i++) {
-            toReturn += bookShelf[i].toString() + "\n";
+            toReturn += bookShelf.get(i).toString() + "\n";
         }
         return toReturn;
     }

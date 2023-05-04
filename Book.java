@@ -2,6 +2,7 @@
  * Class Name: Book
  * 
  * DESCRIPTION: holds data and info for a book in a library
+ * 
  * @author   Rubait Ul Ahamed
  * @version 3.0
  */
@@ -29,12 +30,14 @@ class Book{
         authorLastName = lastName;
         onLoan = false;
 
+
     }
 
 
     /**
-     * Method name: getStatus
-     * @param void
+     * getStatus
+     * finds out if the book is in house or on loan.
+     * 
      * @return (boolean) the onLoad variable
      */
     public boolean getStatus(){
@@ -43,8 +46,8 @@ class Book{
 
 
     /**
-     * Method name: getTitle
-     * @param void
+     * etTitle
+     * 
      * @return (String) the title of the book
      */
     public String getTitle() {
@@ -53,9 +56,9 @@ class Book{
 
 
     /**
-     * Method name: getAuthorFirstName
-     * @param void
-     * @return (String) the first name of the author
+     * getAuthorFirstName
+     * 
+     * @return {String} the first name of the author
      */
     public String getAuthorFirstName() {
         return this.authorFirstName;
@@ -63,9 +66,9 @@ class Book{
 
 
     /**
-     * Method name: getAuthorLastName
-     * @param void
-     * @return (String) the author's last name
+     * getAuthorLastName
+     * 
+     * @return {String} the author's last name
      */
     public String getAuthorLastName() {
         return this.authorLastName;
@@ -73,8 +76,8 @@ class Book{
 
 
     /**
-     * Method name: getInitials
-     * @param void
+     * getInitials
+     * 
      * @return (String) the initial of the author
      *          Ex- Gaimen, Neil
      */
@@ -87,50 +90,45 @@ class Book{
 
 
     /**
-     * Method name: giveOnLoan
-     * @param void
-     * @return (void) sets the boolean flag onLoad to true
+     * giveOnLoan
+     * sets the boolean flag onLoad to true
      */
     public void giveOnLoan(){
         onLoan = true;
-        String msg = "Book loaned:\n" + toString();
-        System.out.println(msg);
+        if (DEBUG)
+            System.out.println("Book loaned:\n" + toString());
     }
 
 
     /**
-     * Method name: recieveBook
-     * @param void
-     * @return (void) sets the boolean flag onLoad to false
+     * recieveBook
+     * sets the boolean flag onLoad to false
      */
     public void recieveBook(){
         onLoan = false;
-        String msg ="Book returned:\n" + toString();
-        System.out.println(msg);
+        if (DEBUG)
+            System.out.println("Book returned:\n" + toString());
     }
 
 
     /**
      * Method Name: toString
-     * @param void
-     * @return (String) returns the title, authors initals and weather it's on loan or not
+     *
+     * @return {String} returns the title, authors initals and weather it's on loan or not
      *                  Ex- "American Gods" - Gaimen, Neil(inLibrary/onLoan)
      */
     @Override
     public String toString(){
         String toReturn = getInitials();
         toReturn += ", " + getTitle();
-        if(DEBUG){
-            toReturn += "(";
-                if(onLoan){
-                    toReturn += "onLoan";
-                } else {
-                    toReturn += "inLibrary";
-                }
-            toReturn += ")";
-        }
+        toReturn += "(";
+            if(onLoan){
+                toReturn += "onLoan";
+            } else {
+                toReturn += "inLibrary";
+            }
+        toReturn += ")";
         return toReturn;
-
     }
 
 }
